@@ -3,8 +3,7 @@ Spree::Admin::OrdersController.class_eval do
     load_order
     respond_with(@order) do |format|
       format.pdf do
-        template = params[:template] || "invoice"
-        render :layout => false , :template => "spree/admin/orders/#{template}.pdf.prawn"
+        render :layout => false , :template => "spree/admin/orders/invoice.pdf.prawn"
       end
     end
   end

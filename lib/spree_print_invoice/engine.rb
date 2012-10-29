@@ -7,7 +7,7 @@ module SpreePrintInvoice
     end
     
     initializer "spree.print_invoice.mimetypes" do |app|
-      Mime::Type.register 'application/pdf', :pdf
+      # seems to be already initialized Mime::Type.register 'application/pdf', :pdf
     end
     
     def self.activate

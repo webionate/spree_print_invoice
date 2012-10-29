@@ -1,0 +1,3 @@
+<% if order.completed_at? %>
+	<%= link_to_with_icon('pdf', t(:invoice_print), spree.admin_order_path(order, :pdf)) %>
+<% end %>

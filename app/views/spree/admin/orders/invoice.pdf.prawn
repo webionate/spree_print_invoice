@@ -1,2 +1,3 @@
-render :partial => "print"
+@shipment = @order.shipment
 
+render :partial => "spree/admin/shared/print"

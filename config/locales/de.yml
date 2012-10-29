@@ -1,0 +1,20 @@
+---
+de:
+  customer_invoice: Rechnung
+  footer_left: "Return in Other info"
+  footer_left2: " 14 days or never"
+  footer_right: "Company  Phone  www "
+  footer_right2: " My great company 040 146 1222 www.gohereoften.com"
+  print_note: Dieses ist nicht die Original-Rechnung (NICHT AN DEN KUNDEN SENDEN)
+  invoice_print: Rechnung drucken
+  packaging_slip_print: Lieferschein drucken
+  packaging_slip: Lieferschein
+  credit_note: Gutschrift
+  credit_note_print: "Gutschrift drucken"
+  sku_short: "Artikel-Nr."
+  mailer:
+    email:
+      dear_customer: "Guten Tag!"
+      thanks: "Vielen Dank für Ihren Einkauf bei %{site_name}!"
+      greetings: "Freundliche Grüße"
+      signature: "Ihr %{site_name}-Team"
