@@ -1,4 +1,4 @@
-if @packaging_slip
+if @packaging_slip || @credit_note
   @column_widths = { 0 => 100, 1 => 315, 2 => 75, 3 => 50 } 
   @align = { 0 => :left, 1 => :left, 2 => :left, 3 => :center }
 else
@@ -11,9 +11,9 @@ bounding_box [0,cursor], :width => 540 do
   
   header =  [Prawn::Table::Cell.new( :text => t(:sku_short), :font_style => :bold), Prawn::Table::Cell.new( :text => t(:item_description), :font_style => :bold )]
   header <<  Prawn::Table::Cell.new( :text => t(:options), :font_style => :bold ) 
-  header <<  Prawn::Table::Cell.new( :text => t(:price), :font_style => :bold ) unless @packaging_slip
+  header <<  Prawn::Table::Cell.new( :text => t(:price), :font_style => :bold ) unless @packaging_slip || @credit_note
   header <<  Prawn::Table::Cell.new( :text => t(:qty), :font_style => :bold, :align => 1 )
-  header <<  Prawn::Table::Cell.new( :text => t(:total), :font_style => :bold ) unless @packaging_slip
+  header <<  Prawn::Table::Cell.new( :text => t(:total), :font_style => :bold ) unless @packaging_slip || @credit_note
     
   table [header],
     :position  => :center,
@@ -42,6 +42,19 @@ bounding_box [0,cursor], :width => 540 do
 		      row << item[1]
 		      content << row
     		end
+    	end
+    elsif @credit_note
+    	items = []
+    	query = "select variant_id, count(id) as quantity from spree_inventory_units where return_authorization_id = '#{@return_authorization.id}' group by variant_id"
+   	 	result = Spree::InventoryUnit.connection.execute(query)
+    	if result
+    		result.each do |item|
+    		  variant = Spree::Variant.find(item[0])
+    		  row = [ variant.product.sku, variant.product.name]
+		      row << variant.option_values.map {|ov| "#{ov.option_type.presentation}: #{ov.presentation}"}.concat(variant.respond_to?('ad_hoc_option_values') ? variant.ad_hoc_option_values.map {|pov| "#{pov.option_value.option_type.presentation}: #{pov.option_value.presentation}"} : []).join(', ')
+		      row << item[1]
+		      content << row
+        	end
     	end
     else    
 	     @order.line_items.each do |item|

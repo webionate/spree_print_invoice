@@ -8,9 +8,5 @@ Spree::Admin::ShipmentsController.class_eval do
       end
     end
   end
-
-  private
-    def load_shipment
-      @shipment = Spree::Shipment.find_by_number!(params[:id]) if params[:id]
-    end
+  
 end

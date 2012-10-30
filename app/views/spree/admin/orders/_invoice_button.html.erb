@@ -1,3 +1,4 @@
 <% if @order.completed_at? %>
-	<div class="toolbar"><%= button_link_to t(:invoice_print), spree.admin_order_path(@order, :pdf , :template => 'invoice'), :icon => 'pdf' %></div>
+	<div class="toolbar"><%= button_link_to t(:invoice_print), spree.admin_order_path(@order, :pdf), :icon => 'pdf' %></div>
 <% end %>
+
