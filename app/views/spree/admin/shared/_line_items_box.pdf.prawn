@@ -62,7 +62,7 @@ bounding_box [0,cursor], :width => 540 do
 	      row << item.variant.option_values.map {|ov| "#{ov.option_type.presentation}: #{ov.presentation}"}.concat(item.respond_to?('ad_hoc_option_values') ? item.ad_hoc_option_values.map {|pov| "#{pov.option_value.option_type.presentation}: #{pov.option_value.presentation}"} : []).join(', ')
 	      row << number_to_currency(item.price)
 	      row << item.quantity
-	      row << number_to_currency(item.price * item.quantity)
+	      row <<  Prawn::Table::Cell.new( :text => number_to_currency(item.price * item.quantity), :font_style => :bold ) 
 	      content << row
 	    end 
     end
