@@ -9,7 +9,7 @@ end
 move_down(7)
 
 ordertotal = @credit_note ? @return_authorization.amount : @order.total
-taxtotal  = @credit_note ? @return_authorization.amount * Spree::TaxRate.find(Spree::Zone.default_tax).amount : @order.tax_total
+taxtotal  = @credit_note ? @return_authorization.amount * Spree::TaxRate.find(Spree::Zone.default_tax).amount : @order.included_tax_total
 
 shipmentlabel = nil
 shipmentamount = 0.0
