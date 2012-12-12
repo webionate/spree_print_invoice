@@ -1,7 +1,7 @@
 repeat :all do
 
 	im = "#{Rails.root.to_s}/app/assets/images/#{Spree::PrintInvoice::Config[:logo]}"
-	image im , :at => [10,740], :scale => 0.75
+	image im , :at => [20,740], :scale => 0.75
 
 	bounding_box [20,740], :width => 540 do
 	    
