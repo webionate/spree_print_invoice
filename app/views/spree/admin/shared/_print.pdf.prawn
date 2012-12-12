@@ -4,11 +4,11 @@ font "Helvetica"
 
 fill_color "000000"
 
-font_size 10
-
 render :partial => "spree/admin/shared/header"
 
-bounding_box [0,600], :width => 540, :height => 540 do
+font_size 10
+
+bounding_box [20,650], :width => 540, :height => 540 do
 
 	render :partial => "spree/admin/shared/address"
 	

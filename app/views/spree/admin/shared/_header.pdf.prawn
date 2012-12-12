@@ -1,9 +1,9 @@
 repeat :all do
 
 	im = "#{Rails.root.to_s}/app/assets/images/#{Spree::PrintInvoice::Config[:logo]}"
-	image im , :at => [0,730], :scale => 0.75
+	image im , :at => [10,740], :scale => 0.75
 
-	bounding_box [0,720], :width => 540 do
+	bounding_box [20,740], :width => 540 do
 	    
 	  	headerdata = [["", Prawn::Table::Cell.new(:text => I18n.t(:company_name), :font_style => :bold), ""]]
 	
@@ -26,7 +26,7 @@ repeat :all do
 	      :border_width => 0.0,
 	      :vertical_padding   => 0,
 	      :horizontal_padding => 0,
-	      :font_size => 10,
+	      :font_size => 7,
 	      :column_widths => { 0 => 340, 1 => 90, 2 => 110}
 	
 	end

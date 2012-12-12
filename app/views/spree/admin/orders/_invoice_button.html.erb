@@ -2,3 +2,7 @@
 	<div class="toolbar"><%= button_link_to t(:invoice_print), spree.admin_order_path(@order, :pdf), :icon => 'pdf' %></div>
 <% end %>
 
+<% if @order.state.downcase == 'canceled' %>
+	<div class="toolbar"><%= button_link_to t(:credit_note_print), spree.admin_order_path(@order, :pdf, :orderstate => @order.state.downcase ), :icon => 'pdf' %></div>
+<% end %>
+

@@ -1,4 +1,4 @@
-unless @packaging_slip || @credit_note
+unless @packaging_slip || @credit_note || @order_canceled
 	move_down(15)
 
 	if @order.payment_method.type.gsub(':','') == "SpreeBillingIntegrationPaypalExpress" || @order.payment_state == "paid"
@@ -16,10 +16,10 @@ if @order.special_instructions && !@order.special_instructions.empty? && @packag
 
 end
 
-move_down(15) unless @credit_note
+move_down(15) unless @credit_note || @order_canceled
 
-text I18n.t('mailer.email.greetings') unless @credit_note
+text I18n.t('mailer.email.greetings') unless @credit_note || @order_canceled
 
-move_down(7) unless @credit_note
+move_down(7) unless @credit_note || @order_canceled
 
-text I18n.t('mailer.email.signature', :site_name => Spree::Config[:site_name]) unless @credit_note
+text I18n.t('mailer.email.signature', :site_name => Spree::Config[:site_name]) unless @credit_note || @order_canceled

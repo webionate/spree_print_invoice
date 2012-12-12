@@ -5,6 +5,8 @@ bounding_box [0,cursor], :width => 540 do
 	orderdata << ["", I18n.t(:shipment_number) , :text => @shipment.number, :align => :right ] if @packaging_slip
 	
 	orderdata << ["", I18n.t(:rma_number) , :text => @return_authorization.number, :align => :right ] if @credit_note
+	
+	orderdata << ["", I18n.t(:rma_number) , :text => "RMA" + @order.number, :align => :right ] if @order_canceled
 
   	orderdata << ["", I18n.t(:order_date) , :text => l(@order.completed_at.to_date), :align => :right ]
 

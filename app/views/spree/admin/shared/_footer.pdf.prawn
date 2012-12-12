@@ -1,6 +1,6 @@
 repeat :all do
 
-	bounding_box [0,50], :width => 540 do
+	bounding_box [20,50], :width => 540 do
 	
 	  stroke do
 	    line_width 0.1
