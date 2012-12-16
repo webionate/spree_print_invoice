@@ -4,7 +4,9 @@ unless @packaging_slip || @credit_note || @order_canceled
 	if @order.payment_method.type.gsub(':','') == "SpreeBillingIntegrationPaypalExpress" || @order.payment_state == "paid"
 		text I18n.t(:order_is_paid, :paymentmethod => @order.payment_method.name), :style => :bold, :align => :center
 	elsif @order.payment_method.type.gsub(':','') == "SpreePaymentMethodPaymentInAdvance"
-		text I18n.t(:order_is_not_paid, :paymentmethod => @order.payment_method.name, :site_url => Spree::Config[:site_url]), :style => :bold, :align => :left
+		text I18n.t(:order_is_not_paid, :condition => nil, :paymentmethod => @order.payment_method.name, :site_url => Spree::Config[:site_url]), :style => :bold, :align => :left
+	elsif @order.payment_method.type.gsub(':','') == "SpreePaymentMethodInvoice"
+		text I18n.t(:order_is_not_paid, :condition => t(:after_delivery), :paymentmethod => I18n.t(:bank_transfer), :site_url => Spree::Config[:site_url]), :style => :bold, :align => :left
 	end
 end
 
