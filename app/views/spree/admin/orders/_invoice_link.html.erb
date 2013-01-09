@@ -1,7 +1,7 @@
 <% if order.state.downcase == 'canceled' %>
-	<%= link_to_with_icon('pdf', t(:credit_note_print), spree.admin_order_path(order, :pdf, :orderstate => order.state.downcase)) %>
+	<%= link_to_with_icon('icon-money no-text', t(:credit_note_print), spree.admin_order_path(order, :pdf, :orderstate => order.state.downcase), :no_text => true) %>
 <% end %>
 
 <% if order.completed_at? %>
-	<%= link_to_with_icon('pdf', t(:invoice_print), spree.admin_order_path(order, :pdf)) %>
+	<%= link_to_with_icon('icon-print no-text', t(:invoice_print), spree.admin_order_path(order, :pdf), :no_text => true) %>
 <% end %>

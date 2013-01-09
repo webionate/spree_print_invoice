@@ -1,0 +1,47 @@
+<% content_for :page_actions do %>
+	<% if @order.state.downcase == 'canceled' %>
+		<li><%= button_link_to t(:credit_note), spree.admin_order_path(@order, :pdf, :orderstate => @order.state.downcase ), :icon => 'icon-print' %></li>
+	<% end %>
+	<% if @order.completed_at? %>
+		<li><%= button_link_to t(:invoice), spree.admin_order_path(@order, :pdf), :icon => 'icon-print' %></li>
+	<% end %>
+  <% if @order.can_cancel?  %>
+  <li>
+    <%= button_link_to t(:cancel_order), fire_admin_order_url(@order.number, { :e => 'cancel' }), :icon => 'icon-trash', :data => { :confirm => "#{t(:are_you_sure)}?" } %>  
+  </li>
+  <% end %>
+  <% if @order.can_resume?  %>
+  <li>
+    <%= button_link_to t(:resume), fire_admin_order_url(@order.number, { :e => 'resume' }), :icon => 'icon-resume', :data => { :confirm => "#{t(:are_you_sure)}?" } %>  
+  </li>
+  <% end %>
+  <li>
+    <%= button_link_to t(:edit), edit_admin_order_url(@order.number), :icon => 'icon-edit' %>
+  </li>
+  <li><%= button_link_to t(:back_to_orders_list), admin_orders_path, :icon => 'icon-arrow-left' %></li>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/order_tabs', :locals => { :current => 'Order Details' } %>
+
+<div data-hook="admin_order_show_addresses" class="row">
+  <% if @order.bill_address %>
+    <fieldset class="alpha six columns no-border-bottom">
+      <legend align="center"><%= t(:bill_address) %></legend>
+      <div class="align-center">
+        <%= render :partial => 'spree/admin/shared/address', :locals => { :address => @order.bill_address } %>  
+      </div>
+    </fieldset>
+  <% end %>
+  <% if @order.ship_address %>
+    <fieldset class="omega six columns no-border-bottom">
+      <legend align="center"><%= t(:ship_address) %></legend>
+      <div class="align-center">
+        <%= render :partial => 'spree/admin/shared/address', :locals => { :address => @order.ship_address } %>
+      </div>
+    </fieldset>
+    <% end %>
+</div>
+
+<div data-hook="admin_order_show_details">
+  <%= render :partial => 'spree/admin/shared/order_details', :locals => { :order => @order } %>
+</div>

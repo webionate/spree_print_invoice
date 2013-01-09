@@ -1,3 +1,3 @@
 <% if shipment.state = 'ready' %>
-	<%= link_to_with_icon('pdf', t(:packaging_slip_print), spree.admin_order_shipment_path(shipment.order, shipment, :pdf)) %>
+	<%= link_to_with_icon('icon-print no-text', t(:packaging_slip_print), spree.admin_order_shipment_path(shipment.order, shipment, :pdf), :no_text => true) %>
 <% end %>
