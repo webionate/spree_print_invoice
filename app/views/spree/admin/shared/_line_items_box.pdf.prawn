@@ -54,7 +54,7 @@ bounding_box [0,cursor], :width => 540 do
 		      row << variant.option_values.map {|ov| "#{ov.option_type.presentation}: #{ov.presentation}"}.concat(variant.respond_to?('ad_hoc_option_values') ? variant.ad_hoc_option_values.map {|pov| "#{pov.option_value.option_type.presentation}: #{pov.option_value.presentation}"} : []).join(', ')
 		      row << item[1]
 		      content << row
-        	end
+        end
     	end
     else    
 	     @order.line_items.each do |item|
@@ -67,14 +67,16 @@ bounding_box [0,cursor], :width => 540 do
 	    end 
     end
     
-    table content,
-      :position => :center,
-      :border_width => 0.5,
-      :vertical_padding   => 5,
-      :horizontal_padding => 6,
-      :font_size => 9,
-      :column_widths => @column_widths ,
-      :align => @align
+    if !content.empty?
+	    table content,
+	      :position => :center,
+	      :border_width => 0.5,
+	      :vertical_padding   => 5,
+	      :horizontal_padding => 6,
+	      :font_size => 9,
+	      :column_widths => @column_widths ,
+	      :align => @align
+    end
   end
 
   render :partial => "spree/admin/shared/order_totals" unless @packaging_slip
