@@ -9,6 +9,9 @@
     <% if @return_authorization.can_cancel? %>
       <li><%= button_link_to t(:cancel), fire_admin_order_return_authorization_url(@order, @return_authorization, :e => 'cancel'), :method => :put, :data => { :confirm => t(:are_you_sure) } %></li>
     <% end %>
+    <% if @return_authorization.received? %>
+			<li><%= button_link_to t(:credit_note_print), object_url(@return_authorization, :pdf), :icon => 'icon-print' %></li>
+		<% end %>
 <% end %>
 
 <%= render :partial => 'spree/admin/shared/order_tabs', :locals => { :current => 'Return Authorizations' } %>
