@@ -5,9 +5,15 @@ repeat :all do
 
 	bounding_box [360,740], :width => 200 do
 	    
-	 	headerdata = [ [ make_cell(:content => I18n.t(:company_name), :font_style => :bold), "" ] ]
+	 	companyname = [ [ make_cell(:content => I18n.t(:company_name), :font_style => :bold) ] ]
+	 	
+	 	table(companyname, :column_widths => [200], :cell_style => {:padding => [0, 0, 0, 0], :border_width => 0, :size => 7})
 	
-		headerdata << [ I18n.t(:store_address_street), "" ]
+	end
+
+	bounding_box [360,732], :width => 200 do
+	    
+		headerdata = [ [ make_cell(:content =>I18n.t(:store_address_street)), "" ] ]
 	
 		headerdata << [ "#{I18n.t(:store_address_zip)} #{I18n.t(:store_address_city)}", "" ]
 		
