@@ -103,7 +103,7 @@ bounding_box [20,650], :width => 540, :height => 540 do
 	if @packaging_slip || @credit_note
 	  @column_widths = { 0 => 100, 1 => 315, 2 => 75, 3 => 50 } 
 	else
-	  @column_widths = { 0 => 75, 1 => 190, 2 => 75, 3 => 75, 4 => 50, 5 => 75 } 
+	  @column_widths = { 0 => 85, 1 => 180, 2 => 75, 3 => 75, 4 => 50, 5 => 75 } 
 	end
 	
 	bounding_box [0,cursor], :width => 540 do
