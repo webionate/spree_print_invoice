@@ -59,7 +59,7 @@ bounding_box [20,650], :width => 540, :height => 540 do
 		orderdata << [ I18n.t(:rma_number) , make_cell(:content => @return_authorization.number, :align => :right) ] if @credit_note	
 		orderdata << [ I18n.t(:rma_number) , make_cell(:content => "RMA" + @order.number, :align => :right) ] if @order_canceled
 		orderdata << [ I18n.t(:order_date) , make_cell(:content => l(@order.completed_at.to_date), :align => :right) ]
-		orderdata << [ I18n.t(:invoice_date) , make_cell(:content => l(Date.today.to_date), :align => :right) ]
+		orderdata << [ I18n.t(:invoice_date) , make_cell(:content => l(Date.today.to_date), :align => :right) ] unless @order_confirmation
 	
 		if (@shipment.state == 'shipped' && @shipment.shipped_at)
 			@shipped_at = @shipment.shipped_at
@@ -83,6 +83,8 @@ bounding_box [20,650], :width => 540, :height => 540 do
 	  text I18n.t(:packaging_slip) , :style => :bold, :size => 18
 	elsif @credit_note || @order_canceled
 	  text I18n.t(:credit_note), :style => :bold, :size => 18
+	elsif @order_confirmation
+	 text I18n.t(:order_confirmation), :style => :bold, :size => 18
 	else
 	  text I18n.t(:customer_invoice), :style => :bold, :size => 18
 	  move_down(15)	
