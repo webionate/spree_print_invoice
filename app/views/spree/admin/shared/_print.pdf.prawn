@@ -228,13 +228,12 @@ bounding_box [20,650], :width => 540, :height => 540 do
 	### notes ###
 	
 	unless @packaging_slip || @credit_note || @order_canceled
-		move_down(15)
-	
-		if @order.payment_state == "paid" || @order.payment_method.type.gsub(':','') == "SpreeBillingIntegrationPaypalExpress" || @order.payment_method.type.gsub(':','') == "SpreeBillingIntegrationPaymillCreditCard"
-			text I18n.t(:order_is_paid, :paymentmethod => @order.payment_method.name), :style => :bold, :align => :center
-		elsif @order.payment_method.type.gsub(':','') == "SpreePaymentMethodPaymentInAdvance"
-			text I18n.t(:order_is_not_paid, :condition => nil, :paymentmethod => @order.payment_method.name, :site_url => Spree::Config[:site_url]), :style => :bold, :align => :left
-		elsif @order.payment_method.type.gsub(':','') == "SpreePaymentMethodInvoice"
+		move_down(15)	  
+		if @order.payment_state == "paid" || @order.payments.last.payment_method.type.gsub(':','') == "SpreeBillingIntegrationPaypalExpress" || @order.payments.last.payment_method.type.gsub(':','') == "SpreeBillingIntegrationPaymillCreditCard" 
+			text I18n.t(:order_is_paid, :paymentmethod => @order.payments.last.payment_method.name), :style => :bold, :align => :center
+		elsif @order.payments.last.payment_method.type.gsub(':','') == "SpreePaymentMethodPaymentInAdvance"
+			text I18n.t(:order_is_not_paid, :condition => nil, :paymentmethod => @order.payments.last.payment_method.name, :site_url => Spree::Config[:site_url]), :style => :bold, :align => :left
+		elsif @order.payments.last.payment_method.type.gsub(':','') == "SpreePaymentMethodInvoice"
 			text I18n.t(:order_is_not_paid, :condition => t(:after_delivery), :paymentmethod => I18n.t(:bank_transfer), :site_url => Spree::Config[:site_url]), :style => :bold, :align => :left
 		end
 	end
