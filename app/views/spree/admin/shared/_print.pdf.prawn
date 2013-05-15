@@ -181,8 +181,12 @@ bounding_box [20,650], :width => 540, :height => 540 do
 			shipmentlabel = nil
 			shipmentamount = 0.0
 			
-			tracking = (@shipment.tracking && !@shipment.tracking.empty? && !@credit_note) ? I18n.t('shipment_mailer.shipped_email.track_information', :tracking => @shipment.tracking) : ""
+			tracking = ""
 			
+			if @shipment.tracking.present? && !@credit_note		   
+			   tracking = (@shipment.respond_to?(:shipment_label) && @shipment.shipment_label.present?) ? "#{I18n.t(:tracking)}: #{@shipment.shipment_label.carrier.upcase} #{@shipment.tracking}" : "#{I18n.t(:tracking)}: #{@shipment.tracking}"    		
+			end
+
 			totals = []
 			
 			unless @credit_note
