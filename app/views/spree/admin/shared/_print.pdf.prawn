@@ -168,16 +168,15 @@ bounding_box [20,650], :width => 540, :height => 540 do
 		### order totals ###
 		unless @packaging_slip
 			if @packaging_slip || @credit_note
-			  @column_widths = { 0 => 354, 1 => 130, 2 => 50 } 
+			  @column_widths = { 0 => 324, 1 => 150, 2 => 50 } 
 			else
-			  @column_widths = { 0 => 335, 1 => 130, 2 => 69 } 
+			  @column_widths = { 0 => 315, 1 => 150, 2 => 69 } 
 			end
 			
 			move_down(7)
 			
 			ordertotal = @credit_note ? @return_authorization.amount : @order.total
-			taxtotal  = @credit_note ? @return_authorization.amount * Spree::TaxRate.find(Spree::Zone.default_tax).amount : @order.included_tax_total
-			
+
 			shipmentlabel = nil
 			shipmentamount = 0.0
 			
@@ -217,7 +216,12 @@ bounding_box [20,650], :width => 540, :height => 540 do
 			
 			totals << ["", make_cell(:content => t(:order_total) + ":", :font_style => :bold, :align => :right), make_cell(:content => number_to_currency(ordertotal), :font_style => :bold, :align => :right)]
 			
-			totals << ["", make_cell(:content => @order.tax_total_label + ":", :align => :right), make_cell(:content => number_to_currency(taxtotal), :align => :right)]
+      @order.available_tax_rates.each do |tax_rate|
+      
+        taxtotal  = @credit_note ? @return_authorization.included_tax_total_by_tax_rate(tax_rate) : @order.included_tax_total_by_tax_rate(tax_rate)
+        
+        totals << ["", make_cell(:content => @order.tax_total_label_by_tax_rate(tax_rate) + ":", :align => :right), make_cell(:content => number_to_currency(taxtotal), :align => :right)]
+      end
   			
 			bounding_box [0, cursor], :width => 534 do		
 				table(totals, :column_widths => @column_widths, :cell_style => {:padding => [2, 0, 2, 6], :border_width => 0, :size => 9 })
