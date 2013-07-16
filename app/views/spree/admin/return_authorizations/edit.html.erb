@@ -12,6 +12,9 @@
     <% if @return_authorization.received? %>
 			<li><%= button_link_to t(:credit_note_print), object_url(@return_authorization, :pdf), :icon => 'icon-print' %></li>
 		<% end %>
+    <% if @return_authorization.received? %>
+      <li><%= button_link_to t(:resend_credit_note), fire_admin_order_return_authorization_url(@order, @return_authorization, :e => 'resend'), :method => :put, :data => { :confirm => t(:are_you_sure) }, :icon => 'icon-email' %></li>
+    <% end %>
 <% end %>
 
 <%= render :partial => 'spree/admin/shared/order_tabs', :locals => { :current => 'Return Authorizations' } %>
