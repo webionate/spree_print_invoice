@@ -34,6 +34,7 @@ bounding_box [20,650], :width => 540, :height => 540 do
 	    else
 	
 	      addressdata = [[" ", tableheader]] 
+	      addressdata << [left_address.company, right_address.company] unless left_address.company.blank? and right_address.company.blank? 
 	      addressdata << ["#{left_address.firstname} #{left_address.lastname}", "#{right_address.firstname} #{right_address.lastname}"]	      
 	      addressdata << [left_address.address1, right_address.address1]	      
 	      addressdata << [left_address.address2, right_address.address2] unless left_address.address2.blank? and right_address.address2.blank?	     
